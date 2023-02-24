@@ -2,7 +2,6 @@ package prefect2
 
 import (
 	"context"
-	"log"
 	"strconv"
 	"time"
 
@@ -58,13 +57,9 @@ func dataSourceBlockSchemasRead(ctx context.Context, d *schema.ResourceData, m i
 	blockSchemaId := d.Get("block_schema_id").(string)
 	checksum := d.Get("checksum").(string)
 
-	log.Printf("MAAIKEL")
-	log.Printf(checksum)
-
 	var blockSchemasOutput []interface{}
 
 	if blockSchemaId != "" {
-		log.Printf("MAAIKEL 1")
 		blockSchema, err := c.GetBlockSchemaById(blockSchemaId, workspaceId)
 		if err != nil {
 			return diag.FromErr(err)
@@ -74,7 +69,6 @@ func dataSourceBlockSchemasRead(ctx context.Context, d *schema.ResourceData, m i
 		blockSchemas[0] = *blockSchema
 		blockSchemasOutput = tfBlockSchemaSchemaOutput(blockSchemas)
 	} else if checksum != "" {
-		log.Printf("MAAIKEL 2")
 		blockSchema, err := c.GetBlockSchemaByChecksum(checksum, workspaceId)
 		if err != nil {
 			return diag.FromErr(err)
@@ -84,7 +78,6 @@ func dataSourceBlockSchemasRead(ctx context.Context, d *schema.ResourceData, m i
 		blockSchemas[0] = *blockSchema
 		blockSchemasOutput = tfBlockSchemaSchemaOutput(blockSchemas)
 	} else {
-		log.Printf("MAAIKEL 3")
 		blockSchemas, err := c.GetAllBlockSchemas(workspaceId)
 		if err != nil {
 			return diag.FromErr(err)
@@ -92,16 +85,11 @@ func dataSourceBlockSchemasRead(ctx context.Context, d *schema.ResourceData, m i
 		blockSchemasOutput = tfBlockSchemaSchemaOutput(blockSchemas)
 	}
 
-	log.Printf("%+v\n", blockSchemasOutput)
-
 	if err := d.Set("block_schemas", blockSchemasOutput); err != nil {
 		return diag.FromErr(err)
 	}
 
 	d.SetId(strconv.FormatInt(time.Now().Unix(), 10))
-
-	log.Printf("MAIKEL D")
-	log.Printf("%+v\n", d)
 
 	return diags
 }
