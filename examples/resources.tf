@@ -36,7 +36,7 @@ resource "prefect2_block" "terraform-kubernetes-job-block" {
 }
 
 resource "time_sleep" "wait_for_prefect2_workspace" {
-    create_duration = "2s"
+    create_duration = "3s"
     depends_on = [
       prefect2_workspace.terraform-workspace
     ]
