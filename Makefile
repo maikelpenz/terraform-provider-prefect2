@@ -39,7 +39,6 @@ testacc:
 hard_apply:
 	rm -rf examples/.terraform                                                          
 	rm -rf examples/.terraform.lock.hcl
-	rm -rf examples/.terraform
 	rm -rf ~/.terraform.d/plugins/
 	rm -rf examples/terraform.log
 	rm -rf examples/terraform.tfstate
