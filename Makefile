@@ -41,7 +41,9 @@ hard_apply:
 	rm -rf examples/.terraform.lock.hcl
 	rm -rf ~/.terraform.d/plugins/
 	rm -rf examples/terraform.log
-	rm -rf examples/terraform.tfstate
-	rm -rf examples/terraform.tfstate.backup
+	rm -rf examples/terraform.tfstate*
 	make install
 	cd examples && terraform init && terraform apply && cd ..
+
+destroy:
+	cd examples && terraform destroy

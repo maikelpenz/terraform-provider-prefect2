@@ -91,8 +91,17 @@ func resourceWorkspaceUpdate(ctx context.Context, d *schema.ResourceData, m inte
 }
 
 func resourceWorkspaceDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+	c := m.(*hc.Client)
+
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
+	workspaceID := d.Id()
+
+	err := c.DeleteWorkspace(workspaceID)
+	if err != nil {
+		return diag.FromErr(err)
+	}
+	
 	return diags
 }
