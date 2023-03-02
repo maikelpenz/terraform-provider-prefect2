@@ -94,5 +94,15 @@ func resourceWorkspaceDelete(ctx context.Context, d *schema.ResourceData, m inte
 	// Warning or errors can be collected in a slice type
 	var diags diag.Diagnostics
 
+	// It is not advisable but uncommenting the following will allow deletion of workspaces on the `terraform apply` command.
+	// c := m.(*hc.Client)
+
+	// workspaceID := d.Id()
+
+	// err := c.DeleteWorkspace(workspaceID)
+	// if err != nil {
+	// 	return diag.FromErr(err)
+	// }
+	
 	return diags
 }

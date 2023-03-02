@@ -35,3 +35,15 @@ test:
 
 testacc: 
 	TF_ACC=1 go test $(TEST) -v $(TESTARGS) -timeout 120m   
+
+hard_apply:
+	rm -rf examples/.terraform                                                          
+	rm -rf examples/.terraform.lock.hcl
+	rm -rf ~/.terraform.d/plugins/
+	rm -rf examples/terraform.log
+	rm -rf examples/terraform.tfstate*
+	make install
+	cd examples && terraform init && terraform apply && cd ..
+
+destroy:
+	cd examples && terraform destroy

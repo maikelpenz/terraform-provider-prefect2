@@ -42,17 +42,16 @@ export PREFECT_ACCOUNT_ID="<YOUR-ACCOUNT-ID>"
 ```
 
 ### 3. Set your CPU architecture
-This step is necessary to build the provider with 
-
-### 4. Build the provider
-This builds the providers's binary and move it to the Terraform plugins directory (usually under `~/.terraform.d/plugins/`)
-
-Before building the provider make sure you've set the correct CPU architecture of your machine.  
-E.g: for MAC M1, use `darwin_arm64`, for MAC Intel use `darwin_amd64`.  
+Make sure you've set the correct CPU architecture of your machine. This step is necessary to build the provider with.
+E.g: For Mac M1, use `darwin_arm64`, for Mac Intel use `darwin_amd64`.  
 ```
 export CPU_ARCHITECTURE="darwin_arm64"
 ```
-Now run the `make` command to build the provider:
+
+### 4. Build the provider
+This builds the providers's binary and move it to the Terraform plugins directory (usually under `~/.terraform.d/plugins/`) 
+
+Run the `make` command to build the provider:
 ```
 make install
 ```

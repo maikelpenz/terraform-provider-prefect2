@@ -2,6 +2,7 @@ package prefect2_api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -72,4 +73,23 @@ func (c *Client) CreateWorkspace(workspace Workspace) (*Workspace, error) {
 	}
 
 	return &newWorkspace, nil
+}
+
+func (c *Client) DeleteWorkspace(workspaceID string) error {
+	req, err := http.NewRequest("DELETE", fmt.Sprintf("%s/accounts/%s/workspaces/%s", c.PrefectApiUrl, c.PrefectAccountId, workspaceID), nil)
+
+	if err != nil {
+		return err
+	}
+
+	body, err := c.doRequest(req, c.PrefectApiKey)
+	if err != nil {
+		return err
+	}
+
+	if string(body) != "" {
+		return errors.New(string(body))
+	}
+	
+	return nil
 }
