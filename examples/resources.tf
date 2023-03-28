@@ -34,3 +34,10 @@ resource "prefect2_block" "terraform-kubernetes-job-block" {
         image = "123456789123.dkr.ecr.eu-west-1.amazonaws.com/kubernetes-job-block:latest"
     }
 }
+
+resource "time_sleep" "wait_for_prefect2_workspace" {
+  create_duration = "3s"
+  depends_on = [
+    prefect2_workspace.terraform-workspace
+  ]
+}
