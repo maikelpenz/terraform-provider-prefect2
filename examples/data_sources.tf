@@ -48,7 +48,7 @@ data "prefect2_block_types" "kubernetes_job_block_type" {
 
 data "prefect2_block_schemas" "kubernetes_job_block_schema" {
     workspace_id = prefect2_workspace.terraform-workspace.id
-    checksum = "sha256:d366f15d529c230ee8bfa36c165bc659243a0452ca220b5e68d3dec2b3c4f533"
+    checksum = "sha256:6323febcd3533e86e1a062793f3ce17d40a132388e1ddc16d3bb1a30d3ea0a6b"
     depends_on = [
         time_sleep.wait_for_prefect2_workspace
     ]
